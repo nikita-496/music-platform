@@ -10,10 +10,10 @@ export class Comment {
   @Prop()
   username: string;
 
-  @Prop( {type: mongoose.Schema.Types.ObjectId, ref: "Track"} )
-  text: number;
-
   @Prop()
+  text: string;
+
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Track'})
   track: Track;
 }
 
