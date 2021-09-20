@@ -25,7 +25,7 @@ const topMenu = [
 ]
 
 const bottomMenu = [
-  {text: 'Добавить музыку', href: '/'},
+  {text: 'Добавить музыку', href: '/music/create'},
 ]
 
 const drawerWidth = 240;

@@ -1,0 +1,18 @@
+.stepInfo{
+  margin: 4.375em 0;
+
+  .stepInfoCard{
+    width: 50em;
+    margin-bottom: 1.5em;
+  }
+  .btn{
+    width: 50em;
+    .btnPrev, .btnNext{
+      &:hover{
+        color: #ffff;
+        background-color: #3F51B5;
+        transition: background-color .3s linear;
+      }
+    }
+  }
+}
