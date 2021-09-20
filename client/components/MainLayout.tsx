@@ -1,22 +1,26 @@
 import  React from 'react';
-
 import Link from 'next/link'
-
-import utilStyles from '../styles/utils.module.css'
 import styles from './layout.module.css'
+import NavBar from './Navbar';
+import { Container } from '@material-ui/core';
+import Player from './Player';
 
-const name = 'Your Name'
-export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home }) {
   return (
-    <div className={styles.container}>
-      <main>{children}</main>
+    <div>
+      <NavBar />
+      <main>
+        <Container className={styles.mainContainer}>
+          {children}
+        </Container>
+        </main>
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">
             <a>← Back to home</a>
           </Link>
+        <Player/>
         </div>
       )}
     </div>

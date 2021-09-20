@@ -5,6 +5,7 @@ import NavBar from '../components/Navbar';
 import {Container, Typography } from '@material-ui/core';
 
 import styles from '../styles/Home.module.scss';
+import Layout from '../components/MainLayout';
 
 const Index = () => {
   return ( 
@@ -12,18 +13,19 @@ const Index = () => {
       <Head>
         <title>Главная</title>
       </Head>
-        <NavBar/>
-          <section className={styles.container}>
-            <Container>
-              <Typography align="center" variant="h2">
-                Добро пожаловать
-              </Typography>
-              <h3>SoundStore</h3>
-              <Link href="/music/">
-                <a>перейти к музыкальной коллекции</a>
-              </Link>
-            </Container>
-        </section>
+          <Layout home={true}>
+            <section className={styles.container}>
+              <Container maxWidth="lg">
+                <Typography className={styles.t} align="center" variant="h2">
+                  Добро пожаловать
+                </Typography>
+                <h3>SoundStore</h3>
+                <Link href="/music/">
+                  <a>перейти к музыкальной коллекции</a>
+                </Link>
+              </Container>
+            </section>
+          </Layout>
     </div>
    );
 }

@@ -1,24 +1,43 @@
 import React from 'react';
-import Image from 'next/image'
 import { ITrack } from '../../types/tracks';
-import { Button } from '@material-ui/core';
-
+import { Box, Grid, IconButton} from '@material-ui/core';
+import styles from "../../styles/TrackItem.module.scss"
+import { Pause, PlayArrow } from '@material-ui/icons';
+import Image from 'next/image';
 interface TrackItemProps {
   track: ITrack;
+  active?: boolean;
 }
  
-const TrackItem: React.FC<TrackItemProps> = ({track}) => {
+const TrackItem: React.FC<TrackItemProps> = ({track, active = false}) => {
   return (
       <li> 
-        {/*<Image 
-          src=
-          alt={track.artist}
-          width={300}
-          height={300}
-        />*/}
-        <p>{track.name}</p>
-        <p>{track.artist}</p>
-        <Button>Отправить</Button>
+        <Box borderBottom={1} borderColor="red" style={{marginBottom: "2em"}}>
+          <Box 
+              display="flex" 
+              justifyContent="space-between" 
+              alignItems="center"
+              style={{paddingBottom: "1em"}}
+          >
+        
+            <Box className={styles.trackInfo}>
+                <IconButton>
+                  {active ? <Pause/> : <PlayArrow/>}
+                </IconButton>
+                <img style={{paddingBottom:".4em"}}
+                  src="http://placehold.jp/50x50.png"
+                  alt={track.artist}
+                />
+                <Grid container direction="column" style={{marginLeft:"1em"}}>
+                  <p style={{marginBottom:"1em"}}>{track.name}</p>
+                  <p>{track.artist}</p>
+                </Grid>
+            </Box>
+            <Box>
+              <time>5:10</time>
+            </Box>
+          </Box>
+        </Box>
       </li>
   );
 }

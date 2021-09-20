@@ -12,8 +12,8 @@ export interface ITrack {
   name: string;
   artist: string;
   text: string;
-  listnets: number;
+  listening: number;
   picture: string;
   audio: string;
-  comments: IComment;
+  comments: IComment[];
 }

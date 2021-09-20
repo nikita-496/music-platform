@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import Layout from '../../components/layout';
-import Image from 'next/image'
+import Layout from '../../components/MainLayout';
 import { ITrack } from '../../types/tracks';
 import TrackItem from './TrackItem';
 
@@ -18,12 +17,12 @@ const Index: React.FC<MusicListProps> = ({tracks}) => {
       <Head>
           <title>Музыкальная коллекция</title>
         </Head>
-        <section style={{backgroundColor: "#8DD35F", margin: "auto 0"}}>
-          <h1 style={{textAlign: "center", textTransform:"capitalize"}}>музыкальная коллекция</h1>
+        <section style={{ margin: "auto 0"}}>
+          <h3 style={{textAlign: "center", textTransform:"capitalize"}}>музыкальная коллекция</h3>
           <ul>
             {trackList}
           </ul>
-        </section>      
+        </section>    
     </Layout>
   );
 }
