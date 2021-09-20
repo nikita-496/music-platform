@@ -12,20 +12,20 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { useRouter } from 'next/dist/client/router';
+import NavList from '../utils/NavList';
 
-const menuItem = [
+const topMenu = [
   {text: 'Главаня', href: '/'},
   {text: 'Музыкальная коллекция', href: '/music'},
   {text: 'Альбомы', href: '/music'},
   {text: 'Артисты', href: '/'},
   {text: 'Жанры', href: '/'},
   {text: 'Топ треки', href: '/'},
+]
+
+const bottomMenu = [
+  {text: 'Добавить музыку', href: '/'},
 ]
 
 const drawerWidth = 240;
@@ -154,21 +154,11 @@ export default function NavBar() {
         </div>
         <Divider />
         <List>
-          {menuItem.map(({text, href}, index) => (
-            <ListItem button key={href} onClick={() => router.push(href)}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <NavList menuItem={topMenu}/>
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+            <NavList menuItem={bottomMenu}/>
         </List>
       </Drawer>
     </div>
