@@ -1,6 +1,5 @@
-
 import { Context, createWrapper } from "next-redux-wrapper";
-import { createStore, Store } from "redux";
+import { createStore, Store} from "redux";
 import { reducer, RootState} from "./reducer";
 
 // create a makeStore function

@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton } from '@material-ui/core';
+import { Grid, IconButton } from '@material-ui/core';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
@@ -8,6 +8,8 @@ import styles from "../styles/Player.module.scss"
 import { ITrack } from '../types/tracks';
 import TrackProgress from './TrackProgress';
 import { VolumeUp } from '@material-ui/icons';
+import { useTypeSelector } from '../hooks/useTypeSelector';
+import { useActions } from '../hooks/useAction';
 
 interface PlayerProps {
   maxVolume: number;
@@ -20,8 +22,11 @@ const Player: React.FC <PlayerProps> = () => {
     _id: "1", name: "Трек 1", artist: "Исполнитель 1", 
   text:"Слова к треку", listening: 5, picture:"http://placehold.jp/50x50.png", audio:"audio", comments: []
 }
+  const {prevTrack, pause, nextTrack} = useTypeSelector (state => state.player.playerControl)
+  const {pauseTrack, playTrack} = useActions()
+ //ОСТАНОВИЛСЯ СДЕСЬ
+  const play = () => pause ? playTrack() : pauseTrack()
 
-  const active = false
   return (
     <div className={styles.player}>
 
@@ -34,17 +39,17 @@ const Player: React.FC <PlayerProps> = () => {
         <p style={{color:"#fff"}}>{track.artist}</p>
       </Grid>
 
-      <IconButton className={styles.playerButton}>
+      <IconButton className={styles.playerButton} onClick={play}>
         <SkipPreviousIcon className={styles.playerControl}/>
       </IconButton>
-      <IconButton className={styles.playerButton}>
-          {active 
+        <IconButton className={styles.playerButton} onClick={play}>
+          {pause 
             ?
             <PlayCircleOutlineIcon className={styles.playerControl}/>
             : <PauseCircleOutlineIcon className={styles.playerControl}/>
           }
     
-      </IconButton>
+        </IconButton>
       <IconButton className={styles.playerButton}>
           <SkipNextIcon className={styles.playerControl}/>
       </IconButton>
