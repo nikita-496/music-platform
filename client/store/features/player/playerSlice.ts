@@ -11,11 +11,10 @@ const initialState: PlayerState = {
     currentDuration: 0,
     fullDuration: 0
   },
-  volume: 0
+  volume: 50
 }
 
 export default function playerReducer (state: PlayerState = initialState, action: PlayerAction): PlayerState {
-  //ОСТАНОВИЛСЯ СДЕСЬ
   switch (action.type) {
     case PlayerActionType.PREVTRACK: 
       return {
