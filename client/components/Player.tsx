@@ -27,13 +27,25 @@ const Player: React.FC <PlayerProps> = () => {
 }
   const {prevTrack, pause, nextTrack} = useTypeSelector (state => state.player.playerControl)
   const {currentDuration, fullDuration} = useTypeSelector (state => state.player.progress)
-  const {volume} = useTypeSelector (state => state.player)
+  const {active, volume} = useTypeSelector (state => state.player)
   const {pauseTrack, playTrack, setVolume, setCurrentDuration, setFullDuration} = useActions()
 
   React.useEffect(()=> {
+    //При первом запуске приложения создается объект audio
     if(!audio) {
       audio = new Audio()
-      audio.src = track.audio
+    } else {
+      //Если же кликнули на трек, делаем его активным
+      setAudio()
+      play()
+    }
+
+  }, [active])
+
+  const setAudio = () => {
+    if(active) {
+      console.log(active)
+      audio.src = "http://localhost:5000/" + active.audio
       audio.volume = volume / 100
       //информация о длительности трека 
       audio.onloadedmetadata = () => {
@@ -44,10 +56,6 @@ const Player: React.FC <PlayerProps> = () => {
         setCurrentDuration( Math.ceil(audio.currentTime) )
       }
     }
-  }, [])
-
-  const setAudio = () => {
-    
   }
 
   const play = () => {
@@ -72,16 +80,19 @@ const Player: React.FC <PlayerProps> = () => {
     setVolume(value)
   }
 
+  if(!active) {
+    return null
+  }
   return (
     <div className={styles.player}>
 
       <img style={{paddingBottom:".4em"}}
           src="http://placehold.jp/50x50.png"
-          alt={track.artist}
+          alt={active?.artist}
       />
       <Grid container direction="column" style={{marginLeft:"1em", width:"10em"}}>
-        <p style={{marginBottom:".5em", color:"#fff"}}>{track.name}</p>
-        <p style={{color:"#fff"}}>{track.artist}</p>
+        <p style={{marginBottom:".5em", color:"#fff"}}>{active?.name}</p>
+        <p style={{color:"#fff"}}>{active?.artist}</p>
       </Grid>
 
       <IconButton className={styles.playerButton} onClick={play}>

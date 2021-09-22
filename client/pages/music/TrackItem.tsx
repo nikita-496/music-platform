@@ -3,13 +3,21 @@ import { ITrack } from '../../types/tracks';
 import { Box, Grid, IconButton} from '@material-ui/core';
 import styles from "../../styles/TrackItem.module.scss"
 import { Pause, PlayArrow } from '@material-ui/icons';
-import Image from 'next/image';
+import { useActions } from '../../hooks/useAction';
 interface TrackItemProps {
   track: ITrack;
   active?: boolean;
 }
  
 const TrackItem: React.FC<TrackItemProps> = ({track, active = false}) => {
+
+  const {playTrack, setActive} = useActions()
+
+  const play = (e) => {
+    e.stopPropagation()
+    setActive(track)
+    playTrack()
+  }
   return (
       <li> 
         <Box borderBottom={1} borderColor="red" style={{marginBottom: "2em"}}>
@@ -21,7 +29,7 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active = false}) => {
           >
         
             <Box className={styles.trackInfo}>
-                <IconButton>
+                <IconButton onClick={play}>
                   {active ? <Pause/> : <PlayArrow/>}
                 </IconButton>
                 <img style={{paddingBottom:".4em"}}
